@@ -1,16 +1,20 @@
 <!-- index.html.erb -->
-<div class="container">
-  <div class="row">
-    <div class="col-xs-offset-4 col-xs-4">
-      <h2>Title: <%= @post.title %></h2>
-      <p>
-        Description: <%= @post.description %>
-      </p>
+
+    <div>
+        <h2>Title: <%= @post.title %> </h2>
+        <p>
+        Author: <%= @post.author %><br/>
+        Description: <%=  @post.description %>
+        </p>
     </div>
-  </div>
-  <%= form_for [@post, @comment] do |f| %>
-    <%= f.text_field :name, class: "form-control" %><br>
-    <%= f.text_area :description, class: "form-control" %> <br>
-    <%= f.submit "Save Comment", class: "btn btn-primary"%>
-  <% end %>
-</div>
+
+	<div>
+	<h2>Comments</h2>
+	<% @comments.each do |comment| %>
+		</div>
+			<p>Description: <%= comment.description %></p>
+			<p>Name: <%= comment.name %> </p>
+		</div>
+	<% end %>
+	</div>
+

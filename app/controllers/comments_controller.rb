@@ -1,29 +1,32 @@
 class CommentsController < ApplicationController
-	  def index
-    post_id = params[:post_id]
-    @post = Post.find(post_id)
-    @comments = @post.comments
-  end
 
-  def new
-    post_id = params[:post_id]
-    @post = Post.find(post_id)
-    @comment = @post.comments.new
-  end
+	def index
+		post_id = params[:post_id]
+		@post = Post.find(post_id)
+		@comments = @post.comments 
+	end
 
-  def create
-    post_id = params[:post_id]
-    @post = Post.find(post_id)
+	def new
+		post_id = params[:post_id]
+		@post = Post.find(post_id)
+		@comment = @post.comments.new
+	end	
 
-    new_comment = params.require(:comment).permit(:description, :name)
-    @comment = @post.comments.create(new_comment)
+	def create
+		post_id = params[:post_id]
+		@post = Post.find(post_id)
 
-    redirect_to post_comment_path(@post.id, @comment)
-  end
+		new_comment = params.require(:comment).permit(:description, :name)
+		@comment = @post.comments.create(new_comment)
 
-  def show
-    post_id = params[:post_id]
-    @post = Post.find(post_id)
-    @comment = @post.comments.find(params[:id])
-  end
+		# redirect_to [@post, @comment]
+		redirect_to post_comment_path(@post.id, @comment)
+	end
+
+	def show
+		post_id = params[:post_id]
+		@post = Post.find(post_id)
+		@comment = @post.comments.find(params[:id])
+	end
+
 end
